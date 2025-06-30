@@ -11,6 +11,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
+use App\Entity\KarmaScore;
 use App\Form\RegistrationForm;
 
 class AuthController extends AbstractController
@@ -18,6 +19,11 @@ class AuthController extends AbstractController
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        // Si l'utilisateur est déjà connecté, on le redirige vers la page d'accueil
+        if ($this->getUser()) {
+            return $this->redirectToRoute('/');
+        }
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
@@ -33,6 +39,11 @@ class AuthController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
     {
+        // Si l'utilisateur est déjà connecté, on le redirige vers la page d'accueil
+        if ($this->getUser()) {
+            return $this->redirectToRoute('/');
+        }
+
         $user = new User();
         $form = $this->createForm(RegistrationForm::class, $user);
         $form->handleRequest($request);
@@ -41,8 +52,14 @@ class AuthController extends AbstractController
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
 
-            // encode the plain password
+            // On set les propriétés de l'utilisateur
+            $user->setRoles(['ROLE_USER']);
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+
+            // On initialise le karmaBalance et le karmaScore
+            $user->setKarmaBalance(200);
+            $KarmaScore = (new KarmaScore())->setScore(0)->setLevel(1);
+            $user->setKarmaScore($KarmaScore);
 
             $entityManager->persist($user);
             $entityManager->flush();

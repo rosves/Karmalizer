@@ -16,6 +16,9 @@ class ExcuseTemplate
     #[ORM\Column(length: 255)]
     private ?string $content = null;
 
+    #[ORM\Column]
+    private ?int $severity_min = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +32,18 @@ class ExcuseTemplate
     public function setContent(string $content): static
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getSeverityMin(): ?int
+    {
+        return $this->severity_min;
+    }
+
+    public function setSeverityMin(int $severity_min): static
+    {
+        $this->severity_min = $severity_min;
 
         return $this;
     }

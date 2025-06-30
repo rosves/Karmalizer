@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\PlatformType;
 use App\Repository\OffenseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -37,11 +38,14 @@ class Offense
     #[ORM\ManyToMany(targetEntity: RedemptionMission::class, mappedBy: 'Offenses')]
     private Collection $redemptionMissions;
 
-    #[ORM\Column]
-    private ?float $score = null;
-
     #[ORM\Column(length: 255)]
     private ?string $target = null;
+
+    #[ORM\Column]
+    private ?int $severity = null;
+
+    #[ORM\Column(enumType: PlatformType::class)]
+    private ?PlatformType $platform = null;
 
     public function __construct()
     {
@@ -147,17 +151,6 @@ class Offense
         return $this;
     }
 
-    public function getScore(): ?float
-    {
-        return $this->score;
-    }
-
-    public function setScore(float $score): static
-    {
-        $this->score = $score;
-
-        return $this;
-    }
 
     public function getTarget(): ?string
     {
@@ -167,6 +160,30 @@ class Offense
     public function setTarget(string $target): static
     {
         $this->target = $target;
+
+        return $this;
+    }
+
+    public function getSeverity(): ?int
+    {
+        return $this->severity;
+    }
+
+    public function setSeverity(int $severity): static
+    {
+        $this->severity = $severity;
+
+        return $this;
+    }
+
+    public function getPlatform(): ?PlatformType
+    {
+        return $this->platform;
+    }
+
+    public function setPlatform(PlatformType $platform): static
+    {
+        $this->platform = $platform;
 
         return $this;
     }
