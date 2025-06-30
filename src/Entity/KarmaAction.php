@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\StatusType;
 use App\Repository\KarmaActionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -38,6 +39,9 @@ class KarmaAction
      */
     #[ORM\OneToMany(targetEntity: RedemptionVote::class, mappedBy: 'KarmaAction_id')]
     private Collection $redemptionVotes;
+
+    #[ORM\Column(enumType: StatusType::class)]
+    private ?StatusType $Type = null;
 
     public function __construct()
     {
@@ -99,6 +103,18 @@ class KarmaAction
                 $redemptionVote->setKarmaActionId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getType(): ?StatusType
+    {
+        return $this->Type;
+    }
+
+    public function setType(StatusType $Type): static
+    {
+        $this->Type = $Type;
 
         return $this;
     }

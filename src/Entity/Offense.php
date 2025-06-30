@@ -37,6 +37,12 @@ class Offense
     #[ORM\ManyToMany(targetEntity: RedemptionMission::class, mappedBy: 'Offenses')]
     private Collection $redemptionMissions;
 
+    #[ORM\Column]
+    private ?float $score = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $target = null;
+
     public function __construct()
     {
         $this->karmaActions = new ArrayCollection();
@@ -137,6 +143,30 @@ class Offense
         if ($this->redemptionMissions->removeElement($redemptionMission)) {
             $redemptionMission->removeOffense($this);
         }
+
+        return $this;
+    }
+
+    public function getScore(): ?float
+    {
+        return $this->score;
+    }
+
+    public function setScore(float $score): static
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    public function getTarget(): ?string
+    {
+        return $this->target;
+    }
+
+    public function setTarget(string $target): static
+    {
+        $this->target = $target;
 
         return $this;
     }
