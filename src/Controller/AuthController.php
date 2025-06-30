@@ -16,12 +16,18 @@ use App\Form\RegistrationForm;
 
 class AuthController extends AbstractController
 {
+    #[Route(path: '/', name: 'app_home')]
+    public function home(): Response{
+
+        return $this->render('pages/home.html.twig');
+    }
+
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // Si l'utilisateur est déjà connecté, on le redirige vers la page d'accueil
         if ($this->getUser()) {
-            return $this->redirectToRoute('/');
+            return $this->redirectToRoute('app_dashboard');
         }
 
         // get the login error if there is one
@@ -41,7 +47,7 @@ class AuthController extends AbstractController
     {
         // Si l'utilisateur est déjà connecté, on le redirige vers la page d'accueil
         if ($this->getUser()) {
-            return $this->redirectToRoute('/');
+            return $this->redirectToRoute('app_dashboard');
         }
 
         $user = new User();
@@ -66,7 +72,9 @@ class AuthController extends AbstractController
 
             // do anything else you need here, like send an email
 
-            return $security->login($user, 'form_login', 'main');
+            $security->login($user, 'form_login', 'main', target_path: 'app_dashboard');
+
+            return$this->redirectToRoute('app_dashboard');
         }
 
         return $this->render('auth/register.html.twig', [
@@ -75,8 +83,9 @@ class AuthController extends AbstractController
     }
 
     #[Route(path: '/logout', name: 'app_logout')]
-    public function logout(): void
+    public function logout(): response
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        return redirectToRoute('app_home');
     }
 }

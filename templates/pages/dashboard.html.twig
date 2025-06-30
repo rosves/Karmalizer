@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard — Karmalizer
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+            const toggleBtn = document.getElementById("sidebar-toggle");
+            const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("sidebar-overlay");
+            const closeBtn = document.getElementById("sidebar-close");
+
+            function openSidebar() {
+            sidebar.classList.remove("hidden");
+            sidebar.classList.add("fixed", "top-0", "left-0", "w-64", "h-full", "bg-white", "z-50", "shadow-lg");
+            overlay.classList.remove("hidden");
+            }
+
+            function closeSidebar() {
+            sidebar.classList.add("hidden");
+            sidebar.classList.remove("fixed", "top-0", "left-0", "w-64", "h-full", "bg-white", "z-50", "shadow-lg");
+            overlay.classList.add("hidden");
+            }
+
+            toggleBtn ?. addEventListener("click", openSidebar);
+            closeBtn ?. addEventListener("click", closeSidebar);
+            overlay ?. addEventListener("click", closeSidebar);
+        });
+	</script>
+{% endblock %}
+
+{% block body %}
+	<div
+		class="min-h-screen flex flex-col lg:flex-row bg-pink-50">
+
+
+		<button id="sidebar-toggle" class="lg:hidden fixed top-4 left-4 z-50 bg-white p-2 rounded shadow">
+			☰
+		</button>
+
+		{% block sidebar %}
+
+			<aside id="sidebar" class="hidden lg:block w-full lg:w-64 bg-white shadow-lg p-6 lg:min-h-screen relative">
+
+				<button id="sidebar-close" class="lg:hidden absolute top-4 right-4 text-gray-700 text-2xl font-bold">&times;</button>
+
+				<div class="flex items-center justify-center mb-10">
+					<h1 class="text-2xl font-bold text-pink-600">Karmalizer</h1>
+				</div>
+				<nav class="space-y-4 text-sm">
+					<a href="{{ path('app_analyse') }}" class="block text-gray-700 hover:text-pink-600 font-medium">Analyse de Post</a>
+					<a href="#" class="block text-gray-700 hover:text-pink-600 font-medium">Missions</a>
+					<a href="#" class="block text-gray-700 hover:text-pink-600 font-medium">Rewards</a>
+					<a href="#" class="block text-gray-700 hover:text-pink-600 font-medium">Actions à faire</a>
+					<a href="#" class="block text-gray-700 hover:text-pink-600 font-medium">Ranking</a>
+				</nav>
+				<div class="mt-10">
+					<a href="{{ path('app_logout') }}" class="block w-full text-center bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 rounded-xl transition">
+						Déconnexion
+					</a>
+				</div>
+			</aside>
+		{% endblock %}
+
+		<main class="flex-1 p-6">
+			{% block topbar %}
+				<div class="bg-white p-4 rounded-xl shadow mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+					<div class="text-lg font-semibold text-gray-800">
+						Bienvenue,
+						<span class="text-pink-600 font-bold">{{ user.username }}</span>
+					</div>
+					<div class="flex gap-4 text-sm text-gray-600">
+						<div>Score :
+							<span class="font-semibold text-pink-500">{{ KarmaScore.score }}</span>
+						</div>
+						<div>Niveau :
+							<span class="font-semibold text-pink-500">{{ KarmaScore.level }}</span>
+						</div>
+					</div>
+				</div>
+			{% endblock %}
+
+			{% block offenses %}
+				<section class="mb-8">
+					<h2 class="text-xl font-bold text-pink-600 mb-4">Posts problématiques</h2>
+					{% if Offenses is defined and Offenses|length > 0 %}
+						<ul class="space-y-3">
+							{% for Offense in Offenses %}
+								<li class="bg-white p-4 rounded-xl shadow text-sm text-gray-700">{{ Offense }}</li>
+							{% endfor %}
+						</ul>
+					{% else %}
+						<div class="bg-green-100 text-green-700 p-4 rounded-xl shadow text-sm">
+							🎉 C’est bien, tu as été sage ! Aucun contenu problématique détecté.
+						</div>
+					{% endif %}
+				</section>
+			{% endblock %}
+
+			{% block missions %}
+				<section>
+					<h2 class="text-xl font-bold text-pink-600 mb-4">Missions karmiques proposées</h2>
+					{% if KarmaActions is defined and KarmaActions|length > 0 %}
+						<ul class="space-y-3">
+							{% for Action in KarmaActions %}
+								<li class="bg-white p-4 rounded-xl shadow text-sm text-gray-700">{{ Action }}</li>
+							{% endfor %}
+						</ul>
+					{% else %}
+						<div class="bg-green-100 text-green-700 p-4 rounded-xl shadow text-sm">
+							🌸 Tu n’as pas de mission pour l’instant. Repose ton karma !
+						</div>
+					{% endif %}
+				</section>
+			{% endblock %}
+		</main>
+	</div>
+{% endblock %}
