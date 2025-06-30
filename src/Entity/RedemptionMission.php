@@ -33,6 +33,9 @@ class RedemptionMission
     #[ORM\ManyToMany(targetEntity: Reward::class, mappedBy: 'RedemptionMission_id')]
     private Collection $rewards;
 
+    #[ORM\Column]
+    private ?int $severity_min = null;
+
     public function __construct()
     {
         $this->Offenses = new ArrayCollection();
@@ -115,6 +118,18 @@ class RedemptionMission
         if ($this->rewards->removeElement($reward)) {
             $reward->removeRedemptionMissionId($this);
         }
+
+        return $this;
+    }
+
+    public function getSeverityMin(): ?int
+    {
+        return $this->severity_min;
+    }
+
+    public function setSeverityMin(int $severity_min): static
+    {
+        $this->severity_min = $severity_min;
 
         return $this;
     }

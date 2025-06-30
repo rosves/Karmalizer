@@ -43,6 +43,10 @@ class KarmaAction
     #[ORM\Column(enumType: StatusType::class)]
     private ?StatusType $Type = null;
 
+    #[ORM\ManyToOne(inversedBy: 'karmaActions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user_id = null;
+
     public function __construct()
     {
         $this->redemptionVotes = new ArrayCollection();
@@ -115,6 +119,18 @@ class KarmaAction
     public function setType(StatusType $Type): static
     {
         $this->Type = $Type;
+
+        return $this;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?User $user_id): static
+    {
+        $this->user_id = $user_id;
 
         return $this;
     }

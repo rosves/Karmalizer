@@ -58,11 +58,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Reward::class, mappedBy: 'User_id')]
     private Collection $rewards;
 
+    #[ORM\Column(length: 255)]
+    private ?string $username = null;
+
+    /**
+     * @var Collection<int, KarmaAction>
+     */
+    #[ORM\OneToMany(targetEntity: KarmaAction::class, mappedBy: 'user_id')]
+    private Collection $karmaActions;
+
     public function __construct()
     {
         $this->offenses = new ArrayCollection();
         $this->redemptionVotes = new ArrayCollection();
         $this->rewards = new ArrayCollection();
+        $this->karmaActions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -249,6 +259,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->rewards->removeElement($reward)) {
             $reward->removeUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): static
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, KarmaAction>
+     */
+    public function getKarmaActions(): Collection
+    {
+        return $this->karmaActions;
+    }
+
+    public function addKarmaAction(KarmaAction $karmaAction): static
+    {
+        if (!$this->karmaActions->contains($karmaAction)) {
+            $this->karmaActions->add($karmaAction);
+            $karmaAction->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeKarmaAction(KarmaAction $karmaAction): static
+    {
+        if ($this->karmaActions->removeElement($karmaAction)) {
+            // set the owning side to null (unless already changed)
+            if ($karmaAction->getUserId() === $this) {
+                $karmaAction->setUserId(null);
+            }
         }
 
         return $this;
