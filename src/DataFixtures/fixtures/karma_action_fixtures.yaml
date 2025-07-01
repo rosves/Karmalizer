@@ -1,0 +1,96 @@
+App\Entity\Apology:
+  apology_1:
+    message: "Je suis sincèrement désolé pour mes propos blessants dans le groupe. Ce n’était ni réfléchi ni acceptable."
+    createdAt: <dateTimeBetween('-1 year', 'now')>
+    Offense_id: '@offense_1'
+    user_id: '@user_1'
+    Type: 'Pending'
+
+  apology_2:
+    message: "Je regrette profondément d’avoir interrompu la réunion de manière irrespectueuse. J’ai compris mon erreur."
+    createdAt: <dateTimeBetween('-1 year', 'now')>
+    Offense_id: '@offense_2'
+    user_id: '@user_2'
+    Type: 'Validated'
+
+  apology_3:
+    message: "Je présente mes excuses pour mon retard répété. Cela ne reflète pas le respect que j’ai pour l’équipe."
+    createdAt: <dateTimeBetween('-1 year', 'now')>
+    Offense_id: '@offense_3'
+    user_id: '@user_3'
+    Type: 'Rejected'
+
+
+App\Entity\Donation:
+  donation_1:
+    amount: 25
+    donationTarget: "La Croix-Rouge"
+    createdAt: <dateTimeBetween('-1 year', 'now')>
+    Offense_id: '@offense_1'
+    user_id: '@user_1'
+    Type: 'Validated'
+
+  donation_2:
+    amount: 50
+    donationTarget: "Médecins Sans Frontières"
+    createdAt: <dateTimeBetween('-1 year', 'now')>
+    Offense_id: '@offense_2'
+    user_id: '@user_2'
+    Type: 'Pending'
+
+  donation_3:
+    amount: 10
+    donationTarget: "Ligue contre le cancer"
+    createdAt: <dateTimeBetween('-1 year', 'now')>
+    Offense_id: '@offense_3'
+    user_id: '@user_3'
+    Type: 'Rejected'
+
+
+App\Entity\Goodeed:
+  goodeed_1:
+    description: "J’ai passé mon samedi après-midi à distribuer des repas aux sans-abri dans mon quartier."
+    createdAt: <dateTimeBetween('-1 year', 'now')>
+    Offense_id: '@offense_1'
+    user_id: '@user_1'
+    Type: 'Validated'
+
+  goodeed_2:
+    description: "J’ai organisé une collecte de vêtements pour une association locale."
+    createdAt: <dateTimeBetween('-1 year', 'now')>
+    Offense_id: '@offense_2'
+    user_id: '@user_2'
+    Type: 'Pending'
+
+  goodeed_3:
+    description: "J’ai accompagné une personne âgée pour faire ses courses chaque semaine pendant un mois."
+    createdAt: <dateTimeBetween('-1 year', 'now')>
+    Offense_id: '@offense_3'
+    user_id: '@user_3'
+    Type: 'Rejected'
+
+
+App\Entity\CreativeRedemption:
+  creative_redemption_1:
+    content: "J’ai écrit une lettre ouverte sur l’importance du respect dans les espaces publics."
+    mediaURL: "https://via.placeholder.com/600x400.png?text=Lettre"
+    createdAt: <dateTimeBetween('-1 year', 'now')>
+    Offense_id: '@offense_1'
+    user_id: '@user_1'
+    Type: 'Validated'
+
+  creative_redemption_2:
+    content: "J’ai réalisé une affiche de sensibilisation au harcèlement moral en entreprise."
+    mediaURL: "https://via.placeholder.com/600x400.png?text=Affiche"
+    createdAt: <dateTimeBetween('-1 year', 'now')>
+    Offense_id: '@offense_2'
+    user_id: '@user_2'
+    Type: 'Pending'
+
+  creative_redemption_3:
+    content: "J’ai produit une courte vidéo pour promouvoir la bienveillance en ligne."
+    mediaURL: "https://via.placeholder.com/600x400.png?text=Vidéo"
+    createdAt: <dateTimeBetween('-1 year', 'now')>
+    Offense_id: '@offense_3'
+    user_id: '@user_3'
+    Type: 'Rejected'

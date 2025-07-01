@@ -1,0 +1,21 @@
+App\Entity\User:
+  admin:
+    username: 'admin_master'
+    email: 'admin@example.com'
+    password: <encodePassword('password')>
+    roles: ['ROLE_ADMIN']
+    KarmaBalance: <numberBetween(100, 500)>
+
+  moderator_{1..3}:
+    username: <userName()>
+    email: <email()>
+    password: <encodePassword('password')>
+    roles: ['ROLE_MODERATOR']
+    KarmaBalance: <numberBetween(50, 200)>
+
+  user_{1..10}:
+    username: <userName()>
+    email: <email()>
+    password: <encodePassword('password')>
+    roles: ['ROLE_USER']
+    KarmaBalance: <numberBetween(0, 100)>

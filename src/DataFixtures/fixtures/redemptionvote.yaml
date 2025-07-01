@@ -1,0 +1,20 @@
+App\Entity\RedemptionVote:
+  redemption_vote_1:
+    VoteValue: 1
+    KarmaAction_id: '@apology_1'
+    User_id: '@user_2'
+
+  redemption_vote_2:
+    VoteValue: -1
+    KarmaAction_id: '@donation_1'
+    User_id: '@user_3'
+
+  redemption_vote_3:
+    VoteValue: 1
+    KarmaAction_id: '@goodeed_1'
+    User_id: '@user_1'
+
+  redemption_vote_4:
+    VoteValue: 0
+    KarmaAction_id: '@creative_redemption_1'
+    User_id: '@user_4'
