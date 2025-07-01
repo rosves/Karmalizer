@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Analyse de Post — Karmalizer{% endblock %}
+
+{% block javascripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById("sidebar-toggle");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebar-overlay");
+    const closeBtn = document.getElementById("sidebar-close");
+
+    function openSidebar() {
+        sidebar.classList.remove("hidden");
+        sidebar.classList.add("fixed", "top-0", "left-0", "w-64", "h-full", "bg-white", "z-50", "shadow-lg");
+        overlay.classList.remove("hidden");
+    }
+
+    function closeSidebar() {
+        sidebar.classList.add("hidden");
+        sidebar.classList.remove("fixed", "top-0", "left-0", "w-64", "h-full", "bg-white", "z-50", "shadow-lg");
+        overlay.classList.add("hidden");
+    }
+
+    toggleBtn?.addEventListener("click", openSidebar);
+    closeBtn?.addEventListener("click", closeSidebar);
+    overlay?.addEventListener("click", closeSidebar);
+});
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="min-h-screen flex flex-col lg:flex-row bg-pink-50">
+
+    {% include 'Components/SideNav.html.twig' %}
+
+    <main class="flex-1 p-6">
+        <h2 class="text-2xl font-bold text-pink-600 mb-8 text-center">Analyse de Post</h2>
+
+        <div class="bg-white rounded-xl shadow p-6 max-w-2xl mx-auto">
+            {{ form_start(AnalyseForm) }}
+                <div class="mb-4">
+                    {{ form_label(AnalyseForm.AnalysePost, null, {'label_attr': {'class': 'block mb-2 font-semibold text-gray-700'}}) }}
+                    {{ form_widget(AnalyseForm.AnalysePost, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500'}}) }}
+                    {{ form_errors(AnalyseForm.AnalysePost) }}
+                </div>
+                <div class="mb-4">
+                    {{ form_label(AnalyseForm.Plateforme, null, {'label_attr': {'class': 'block mb-2 font-semibold text-gray-700'}}) }}
+                    {{ form_widget(AnalyseForm.Plateforme, {'attr': {'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500'}}) }}
+                    {{ form_errors(AnalyseForm.Plateforme) }}
+                </div>
+
+                <button type="submit" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-xl transition">
+                    Analyser
+                </button>
+            {{ form_end(AnalyseForm) }}
+        </div>
+    </main>
+</div>
+{% endblock %}

@@ -10,11 +10,8 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
+        bind:
+            string $apiKey: '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'
+    App\Service\OpenAI:
     App\:
         resource: '../src/'
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
