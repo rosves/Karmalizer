@@ -16,7 +16,7 @@ class Offense
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 600)]
     private ?string $content = null;
 
     #[ORM\Column]
@@ -38,9 +38,6 @@ class Offense
     #[ORM\ManyToMany(targetEntity: RedemptionMission::class, mappedBy: 'Offenses')]
     private Collection $redemptionMissions;
 
-    #[ORM\Column(length: 255)]
-    private ?string $target = null;
-
     #[ORM\Column]
     private ?int $severity = null;
 
@@ -51,6 +48,7 @@ class Offense
     {
         $this->karmaActions = new ArrayCollection();
         $this->redemptionMissions = new ArrayCollection();
+        $this->date_offense = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -147,19 +145,6 @@ class Offense
         if ($this->redemptionMissions->removeElement($redemptionMission)) {
             $redemptionMission->removeOffense($this);
         }
-
-        return $this;
-    }
-
-
-    public function getTarget(): ?string
-    {
-        return $this->target;
-    }
-
-    public function setTarget(string $target): static
-    {
-        $this->target = $target;
 
         return $this;
     }

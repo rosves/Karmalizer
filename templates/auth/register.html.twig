@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription — Karmalizer{% endblock %}
+
+{% block body %}
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-b from-pink-50 to-white px-4 py-12">
+    <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl">
+        <h1 class="text-3xl font-bold text-pink-600 text-center mb-6">Créer un compte</h1>
+
+        {{ form_start(registrationForm, {'attr': {'class': 'space-y-5'}}) }}
+            {{ form_errors(registrationForm) }}
+
+            <div>
+                {{ form_label(registrationForm.email, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:ring-pink-500 focus:border-pink-500'}}) }}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+
+            <div>
+                {{ form_label(registrationForm.username, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                {{ form_widget(registrationForm.username, {'attr': {'class': 'mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:ring-pink-500 focus:border-pink-500'}}) }}
+                {{ form_errors(registrationForm.username) }}
+            </div>
+
+            <div>
+                {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:ring-pink-500 focus:border-pink-500'}}) }}
+                {{ form_errors(registrationForm.plainPassword) }}
+            </div>
+
+            <div class="flex items-start">
+                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'mt-1 mr-2 rounded'}}) }}
+                <label class="text-sm text-gray-600">{{ form_label(registrationForm.agreeTerms) }}</label>
+            </div>
+            {{ form_errors(registrationForm.agreeTerms) }}
+
+            <div>
+                <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 px-4 rounded-xl transition duration-300">
+                    Créer un compte
+                </button>
+            </div>
+        {{ form_end(registrationForm) }}
+
+        <p class="text-center text-sm text-gray-600 mt-6">
+            Déjà inscrit ?
+            <a href="{{ path('app_login') }}" class="text-pink-600 hover:underline">Connecte-toi</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
