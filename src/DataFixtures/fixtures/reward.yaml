@@ -1,0 +1,52 @@
+App\Entity\Reward:
+  reward_1:
+    name: "Badge Zen Master"
+    description: "Attribué après avoir prouvé que tu peux répondre calmement à des trolls trois fois de suite."
+    createdAt: <dateTimeBetween('-6 months', 'now')>
+    type: 'badge'
+    User_id:
+      - '@user_2'
+      - '@user_4'
+    RedemptionMission_id:
+      - '@redemption_mission_1'
+
+  reward_2:
+    name: "Trophée de l'Empathie"
+    description: "Décerné à ceux qui ont réussi à exprimer de l’empathie sans emoji ni sarcasme apparent."
+    createdAt: <dateTimeBetween('-6 months', 'now')>
+    type: 'trophy'
+    User_id:
+      - '@user_1'
+    RedemptionMission_id:
+      - '@redemption_mission_3'
+
+  reward_3:
+    name: "Coupon Karma+"
+    description: "Un bon d’achat fictif pour booster ton karma auprès de l’IA (ne fonctionne pas IRL)."
+    createdAt: <dateTimeBetween('-6 months', 'now')>
+    type: 'coupon'
+    User_id:
+      - '@user_5'
+      - '@user_8'
+    RedemptionMission_id:
+      - '@redemption_mission_2'
+
+  reward_4:
+    name: "Badge Réhabilitation Numérique"
+    description: "Tu as survécu à une semaine sans clash en ligne. Ton compteur d'honneur est réinitialisé."
+    createdAt: <dateTimeBetween('-6 months', 'now')>
+    type: 'badge'
+    User_id:
+      - '@user_6'
+    RedemptionMission_id:
+      - '@redemption_mission_3'
+
+  reward_5:
+    name: "Trophée du Like Altruiste"
+    description: "Pour avoir liké 10 posts sans lien avec ton image personnelle ou ta visibilité."
+    createdAt: <dateTimeBetween('-6 months', 'now')>
+    type: 'trophy'
+    User_id:
+      - '@user_3'
+    RedemptionMission_id:
+      - '@redemption_mission_2'

@@ -1,0 +1,160 @@
+App\Entity\Offense:
+  offense_1:
+    content: "Ferme ta gueule, t’as littéralement rien d’intelligent à dire."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_1'
+    target: "julie_dev"
+    severity: 3
+    platform: 'twitter'
+
+  offense_2:
+    content: "T’es juste une erreur de la nature, arrête de poster des conneries."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_2'
+    target: "remi_tech"
+    severity: 3
+    platform: 'reddit'
+
+  offense_3:
+    content: "Je perds des neurones à chaque fois que je lis tes tweets."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_3'
+    target: "camille_ui"
+    severity: 2
+    platform: 'twitter'
+
+  offense_4:
+    content: "T’as été élevé par des singes ou quoi ? T’es vraiment débile profond."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_4'
+    target: "kevin_dev"
+    severity: 3
+    platform: 'reddit'
+
+  offense_5:
+    content: "Chaque post de toi est une démonstration de stupidité, bravo champion."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_5'
+    target: "melanie.w"
+    severity: 2
+    platform: 'twitter'
+
+  offense_6:
+    content: "Tu sers littéralement à rien, arrête Internet pour le bien de tous."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_6'
+    target: "jerome87"
+    severity: 3
+    platform: 'reddit'
+
+  offense_7:
+    content: "T’es l’incarnation de l’échec, même ton pseudo est gênant."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_7'
+    target: "zoe.code"
+    severity: 2
+    platform: 'twitter'
+
+  offense_8:
+    content: "Va lire un livre au lieu de raconter ta vie de loser ici."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_8'
+    target: "nathanix"
+    severity: 2
+    platform: 'reddit'
+
+  offense_9:
+    content: "C’est pas possible d’être aussi conne, fais un effort."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_9'
+    target: "laura_dev"
+    severity: 3
+    platform: 'twitter'
+
+  offense_10:
+    content: "Ton visage me donne envie de désinstaller l’application."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_10'
+    target: "flo_design"
+    severity: 3
+    platform: 'reddit'
+
+  offense_11:
+    content: "T’es tellement toxique que t’as dû naître dans un bidon de javel."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_1'
+    target: "bastienB"
+    severity: 3
+    platform: 'twitter'
+
+  offense_12:
+    content: "Tu fais honte à ta famille chaque fois que tu tweetes."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_2'
+    target: "claire.tech"
+    severity: 3
+    platform: 'reddit'
+
+  offense_13:
+    content: "Même un bot chinois aurait plus de charisme que toi."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_3'
+    target: "lucas_twit"
+    severity: 2
+    platform: 'twitter'
+
+  offense_14:
+    content: "T’es pas juste nul, t’es une perte de bande passante."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_4'
+    target: "jade_dev"
+    severity: 2
+    platform: 'reddit'
+
+  offense_15:
+    content: "Quand tu écris, on dirait un QI négatif sous acide."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_5'
+    target: "matt_design"
+    severity: 3
+    platform: 'twitter'
+
+  offense_16:
+    content: "Tu devrais être banni juste pour exister sur Internet."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_6'
+    target: "ana.karma"
+    severity: 3
+    platform: 'reddit'
+
+  offense_17:
+    content: "Tu vises l’humour mais t’atterris dans la gêne absolue."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_7'
+    target: "julien92"
+    severity: 2
+    platform: 'twitter'
+
+  offense_18:
+    content: "Si l’intelligence artificielle te scanne, elle se suicide."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_8'
+    target: "emma_ai"
+    severity: 3
+    platform: 'reddit'
+
+  offense_19:
+    content: "T’es le genre de personne qui donne envie de couper le Wi-Fi à la planète."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_9'
+    target: "hugo.dev"
+    severity: 3
+    platform: 'twitter'
+
+  offense_20:
+    content: "Ton existence sur ce thread est déjà un micro-agression."
+    date_offense: <dateTimeBetween('-6 months', 'now')>
+    user_id: '@user_10'
+    target: "ines_ui"
+    severity: 2
+    platform: 'reddit'
