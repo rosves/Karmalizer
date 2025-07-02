@@ -1,0 +1,5 @@
+App\Entity\KarmaScore:
+  karma_score_{1..10}:
+    score: <numberBetween(0, 1000)>
+    level: <numberBetween(1, 10)>
+    user_id: '@user_<current()>'

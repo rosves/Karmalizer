@@ -60,7 +60,7 @@
 					{% if Offenses is defined and Offenses|length > 0 %}
 						<ul class="space-y-3">
 							{% for Offense in Offenses %}
-								<li class="bg-white p-4 rounded-xl shadow text-sm text-gray-700">{{ Offense }}</li>
+								<li class="bg-white p-4 rounded-xl shadow text-sm text-gray-700">{{ Offense.content }}</li>
 							{% endfor %}
 						</ul>
 					{% else %}
@@ -75,11 +75,9 @@
 				<section>
 					<h2 class="text-xl font-bold text-pink-600 mb-4">Missions karmiques proposées</h2>
 					{% if KarmaActions is defined and KarmaActions|length > 0 %}
-						<ul class="space-y-3">
-							{% for Action in KarmaActions %}
-								<li class="bg-white p-4 rounded-xl shadow text-sm text-gray-700">{{ Action }}</li>
-							{% endfor %}
-						</ul>
+						{% for action in KarmaActions %}
+                            {% include 'Components/KarmaActionCard.html.twig' with {'action': action} %}
+                        {% endfor %}
 					{% else %}
 						<div class="bg-green-100 text-green-700 p-4 rounded-xl shadow text-sm">
 							🌸 Tu n’as pas de mission pour l’instant. Repose ton karma !

@@ -35,26 +35,26 @@ final class UserController extends AbstractController
     }
 
     #[Route('/user/analyse', name: 'app_analyse')]
-    public function analyse(Request $request, User $user, SeverityAnalyzer $severityAnalyzer, Offense $offense, EntityManagerInterface $em): Response
+    public function analyse(Request $request, User $user, SeverityAnalyzer $severityAnalyzer, Offense $offense, EntityManagerInterface $em, RedemptionMissionRepository $RedemptionMission): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(AnalyseForm::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $Post = $form->get('AnalysePost')->getData();
-            $score = $severityAnalyzer->analyze($Post);
+            $score = $severityAnalyzer->analyze($form->get('AnalysePost')->getData());
 
             if(!$score) {
                 $this->addFlash('error', 'Aucun score n\'a été calculé. Veuillez réessayer.');
             }
 
             $offense = new Offense();
+            $Missions = $RedemptionMission->findBy(['severity_min' => $score]);
             $offense->setContent($Post)
                     ->setSeverity($score)
-                    ->setPlatform($form->get('Plateforme')->getData());
-            $offense->setUserId($user);
-
+                    ->setPlatform($form->get('Plateforme')->getData())
+                    ->setUserId($user)
+                    ->setRedemptionMissions($Missions);
             $em->persist($offense);
             $em->flush();
 
@@ -77,6 +77,7 @@ final class UserController extends AbstractController
 
         return $this->render('pages/offense_detail.html.twig', [
             'offense' => $offense,
+            'missions' => $Missions,
         ]);
     }
 

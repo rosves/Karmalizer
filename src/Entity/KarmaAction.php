@@ -117,15 +117,15 @@ class KarmaAction
     }
 
     public function setType(StatusType|string $Type): static
-{
-    if (is_string($Type)) {
-        $Type = StatusType::from($Type);
+    {
+        if (is_string($Type)) {
+            $Type = StatusType::from($Type);
+        }
+
+        $this->Type = $Type;
+
+        return $this;
     }
-
-    $this->Type = $Type;
-
-    return $this;
-}
 
     public function getUserId(): ?User
     {
