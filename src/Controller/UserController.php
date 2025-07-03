@@ -15,6 +15,7 @@ use App\Service\SeverityAnalyzer;
 use App\Repository\OffenseRepository;
 use App\Repository\KarmaActionRepository;
 use App\Repository\RedemptionMissionRepository;
+use App\Repository\UserRepository;
 
 
 
@@ -103,10 +104,7 @@ final class UserController extends AbstractController
 
         return $this->render('pages/offense_detail.html.twig', [
             'offense' => $offense,
-            'Redemption' => [
-                'missions' => $Missions,
-                'rewards' => $Rewards,
-            ],
+            'missions' => $Missions,
             'karmaActions' => $karmaActionsUser,
         ]);
     }
@@ -120,6 +118,29 @@ final class UserController extends AbstractController
       return $this->render('pages/mission_detail.html.twig', [
             'KarmaAction' => $id,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/user/rewards', name: 'app_rewards')]
+    public function rewards(): Response {
+        $user = $this->getUser();
+        $userRewards = $user->getRewards();
+
+        if (!$userRewards) {
+            $this->addFlash('info', 'Aucune récompense trouvée.');
+        }
+
+        return $this->render('pages/reward.html.twig', [
+            'rewards' => $userRewards,
+        ]);
+    }
+
+    #[Route('/user/ranking', name: 'app_ranking')]
+    public function ranking(userRepository $user): Response {
+        $users = $user->findUsersByKarmaScoreDesc(10);
+
+        return $this->render('pages/ranking.html.twig', [
+            'users' => $users,
         ]);
     }
 

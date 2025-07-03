@@ -33,6 +33,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
+    public function findUsersByKarmaScoreDesc(int $limit = 10)
+    {
+        return $this->createQueryBuilder('u')
+            ->join('u.karmaScore', 'k')
+            ->orderBy('k.score', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return User[] Returns an array of User objects
     //     */

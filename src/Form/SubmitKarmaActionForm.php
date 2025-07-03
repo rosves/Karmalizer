@@ -9,23 +9,22 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
+use App\Enum\KarmaActionType;
+
 
 class SubmitKarmaActionForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('Type')
-            ->add('Offense_id', EntityType::class, [
-                'class' => Offense::class,
-                'choice_label' => 'id',
-            ])
-            ->add('user_id', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
+            ->add('Type', EnumType::class, [
+                'class' => KarmaActionType::class,
+                'label' => 'Type d\'action',
+                'placeholder' => 'Sélectionnez une action',
+                'attr' => [
+                    'class' => 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500',
+                ],
             ])
         ;
     }

@@ -32,15 +32,14 @@ class SeverityAnalyzer
             }
         }
 
-        switch ($count) {
-            case 0:
-                return 0;
-            case $count > 0 && $count < 2:
-                return 1;
-            case $count > 2 && $count < 4:
-                return 2;
-            case $count > 4:
-                return 3;
+        if ($count === 0) {
+            return 0;
+        } elseif ($count < 2) {
+            return 1;
+        } elseif ($count < 4) {
+            return 2;
+        } else {
+            return 3;
         }
     }
 }

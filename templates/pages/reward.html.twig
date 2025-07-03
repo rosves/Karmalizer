@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Récompenses — Karmalizer{% endblock %}
+
+{% block javascripts %}
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+            const toggleBtn = document.getElementById("sidebar-toggle");
+            const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("sidebar-overlay");
+            const closeBtn = document.getElementById("sidebar-close");
+
+            function openSidebar() {
+            sidebar.classList.remove("hidden");
+            sidebar.classList.add("fixed", "top-0", "left-0", "w-64", "h-full", "bg-white", "z-50", "shadow-lg");
+            overlay.classList.remove("hidden");
+            }
+
+            function closeSidebar() {
+            sidebar.classList.add("hidden");
+            sidebar.classList.remove("fixed", "top-0", "left-0", "w-64", "h-full", "bg-white", "z-50", "shadow-lg");
+            overlay.classList.add("hidden");
+            }
+
+            toggleBtn ?. addEventListener("click", openSidebar);
+            closeBtn ?. addEventListener("click", closeSidebar);
+            overlay ?. addEventListener("click", closeSidebar);
+        });
+	</script>
+{% endblock %}
+
+{% block body %}
+	<div class="min-h-screen flex flex-col lg:flex-row bg-pink-50">
+
+		{% include 'Components/SideNav.html.twig' %}
+
+		<main class="flex-1 p-6">
+			<h1 class="text-2xl font-bold text-pink-600 mb-6 text-center">Mes Récompenses</h1>
+
+			{% if rewards is defined and rewards|length > 0 %}
+				<div class="space-y-4">
+					{% for reward in rewards %}
+						<div class="bg-white rounded-xl shadow p-4 flex flex-col sm:flex-row            sm:justify-between sm:items-center">
+							<div class="mb-3 sm:mb-0">
+								<h2 class="text-lg font-semibold text-pink-600">{{ reward.name }}</h2>
+								<p class="text-gray-700 text-sm mt-1">{{ reward.description }}</p>
+							</div>
+							<div class="text-xs text-gray-500 sm:text-right">
+								<time datetime="{{ reward.createdAt ? reward.createdAt|date('c') : '' }}">
+									{{ reward.createdAt ? reward.createdAt|date('d/m/Y') : 'Date inconnue' }}
+								</time>
+								<div class="mt-1 font-semibold
+																				                                {% if reward.type == constant('App\\Enum\\RewardType::badge') %}
+																				                                    text-green-500
+																				                                {% elseif reward.type == constant('App\\Enum\\RewardType::trophy') %}
+																				                                    text-blue-500
+																				                                {% elseif reward.type == constant('App\\Enum\\RewardType::coupon') %}
+																				                                    text-orange-500
+																				                                {% else %}
+																				                                    text-gray-400
+																				                                {% endif %}
+																				                                            ">
+									{{ reward.type.value ? reward.type.value : 'Type inconnu' }}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			{% else %}
+				<div class="bg-green-100 text-green-700 p-4 rounded-xl shadow text-center">
+					Tu n'as pas encore de récompenses.
+				</div>
+			{% endif %}
+
+		</main>
+	</div>
+{% endblock %}
