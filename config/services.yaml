@@ -6,7 +6,7 @@
 parameters:
 
 services:
-    App\DataFixtures\providers\EncodePasswordProvider:
+    App\DataFixtures\fixtures\providers\EncodePasswordProvider:
         arguments:
             $passwordHasher: '@security.user_password_hasher'
         tags: [ nelmio_alice.faker.provider ]
