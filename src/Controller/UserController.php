@@ -12,6 +12,8 @@ use App\Entity\Offense;
 use App\Form\AnalyseForm;
 use App\Service\SeverityAnalyzer;
 use App\Repository\OffenseRepository;
+use App\Repository\KarmaActionRepository;
+use App\Repository\RedemptionMissionRepository;
 
 
 
@@ -19,12 +21,12 @@ final class UserController extends AbstractController
 {
 
     #[Route('/user/dashboard', name: 'app_dashboard')]
-    public function index(User $user): Response
+    public function index(User $user, KarmaActionRepository $KarmaActionRepository): Response
     {
         $user = $this->getUser();
         $KarmaScore = $user->getKarmaScore();
         $Offenses = $user->getOffenses();
-        $KarmaActions = $user->getKarmaActions();
+        $KarmaActions = $KarmaActionRepository->findBy(['user_id' => $user, 'Type'=> 'Pending']);
 
         return $this->render('pages/dashboard.html.twig', [
             'user' => $user,
@@ -42,7 +44,8 @@ final class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $score = $severityAnalyzer->analyze($form->get('AnalysePost')->getData());
+            $Post = $form->get('AnalysePost')->getData();
+            $score = $severityAnalyzer->analyze($Post);
 
             if(!$score) {
                 $this->addFlash('error', 'Aucun score n\'a été calculé. Veuillez réessayer.');
@@ -53,8 +56,10 @@ final class UserController extends AbstractController
             $offense->setContent($Post)
                     ->setSeverity($score)
                     ->setPlatform($form->get('Plateforme')->getData())
-                    ->setUserId($user)
-                    ->setRedemptionMissions($Missions);
+                    ->setUserId($user);
+            foreach ($Missions as $mission) {
+                $offense->addRedemptionMission($mission);
+            }
             $em->persist($offense);
             $em->flush();
 
@@ -69,15 +74,47 @@ final class UserController extends AbstractController
 
     #[Route('/user/offenses{id}', name: 'app_offense_detail')]
     public function offenseDetail($id,OffenseRepository $Offense): Response {
+
         $offense = $Offense->find($id);
+        $user = $this->getUser();
 
         if (!$offense) {
             throw $this->createNotFoundException('Offense not found');
         }
 
+        if ($offense->getUserId() !== $user && !$this->isGranted('ROLE_MODERATOR', 'ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Vous ne pouvez pas accéder à cette offense');
+        }
+
+        $KarmaActions = $offense->getKarmaActions();
+        $Missions = $offense->getRedemptionMissions();
+
+        $karmaActionsUser = $KarmaActions->filter(function($ka) use ($user) {
+            return $ka->getUserId() === $user;
+        });
+
+        $Rewards = [];
+        foreach ($Missions as $mission) {
+            foreach ($mission->getRewards() as $reward) {
+                $Rewards[] = $reward;
+            }
+        }
+
         return $this->render('pages/offense_detail.html.twig', [
             'offense' => $offense,
-            'missions' => $Missions,
+            'Redemption' => [
+                'missions' => $Missions,
+                'rewards' => $Rewards,
+            ],
+            'karmaActions' => $karmaActionsUser,
+        ]);
+    }
+
+    #[Route('/user/KarmaActions/{id}', name: 'app_karmaAction_detail')]
+    public function KarmaActionDetail($id): Response {
+
+      return $this->render('pages/mission_detail.html.twig', [
+            'KarmaAction' => $id,
         ]);
     }
 

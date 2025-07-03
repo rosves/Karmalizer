@@ -1,30 +1,37 @@
-
-
-{% if action is instanceof('App\\Entity\\Apology') %}
-    <div class="mb-2.5 bg-white p-4 rounded-xl shadow text-sm text-gray-700">
-        <p class="font-semibold text-gray-800">Excuse présentée</p>
-        <p class="mt-1">{{ action.message }}</p>
+<div class="mb-6 bg-white rounded-xl shadow p-4 flex flex-col sm:flex-row sm:justify-between">
+  <div class="flex-1">
+    <div class="flex justify-between items-start">
+      <h3 class="text-lg font-semibold text-pink-600">
+        {{
+          action is instanceof('App\\Entity\\Apology') ? 'Excuse présentée' :
+          action is instanceof('App\\Entity\\Donation') ? 'Don effectué' :
+          action is instanceof('App\\Entity\\CreativeRedemption') ? 'Action créative' :
+          action is instanceof('App\\Entity\\Goodeed') ? 'Bonne action' : 'Action'
+        }}
+      </h3>
     </div>
 
-{% elseif action is instanceof('App\\Entity\\Donation') %}
-    <div class="mb-2.5 bg-white p-4 rounded-xl shadow text-sm text-gray-700">
-        <p class="font-semibold text-gray-800">Don effectué</p>
-        <p class="mt-1">
-            {{ action.amount }}€
-            <span class="text-gray-500">vers</span>
-            <em>{{ action.donationTarget }}</em>
-        </p>
-    </div>
+    <p class="mt-2 text-gray-700 text-sm">
+      {% if action is instanceof('App\\Entity\\Apology') %}
+        {{ action.message }}
+      {% elseif action is instanceof('App\\Entity\\Donation') %}
+        {{ action.amount }}€ <span class="text-gray-500">vers</span> <em>{{ action.donationTarget }}</em>
+      {% elseif action is instanceof('App\\Entity\\CreativeRedemption') %}
+        <em class="italic text-gray-600">{{ action.content }}</em>
+      {% elseif action is instanceof('App\\Entity\\Goodeed') %}
+        {{ action.description }}
+      {% else %}
+        Détails non disponibles.
+      {% endif %}
+    </p>
+  </div>
 
-{% elseif action is instanceof('App\\Entity\\CreativeRedemption') %}
-    <div class=" mb-2.5 bg-white p-4 rounded-xl shadow text-sm text-gray-700">
-        <p class="font-semibold text-gray-800">Action créative</p>
-        <p class="mt-1 italic text-gray-600">{{ action.content }}</p>
-    </div>
-
-{% elseif action is instanceof('App\\Entity\\Goodeed') %}
-    <div class="mb-2.5 bg-white p-4 rounded-xl shadow text-sm text-gray-700">
-        <p class="font-semibold text-gray-800">Bonne action</p>
-        <p class="mt-1">{{ action.description }}</p>
-    </div>
-{% endif %}
+  <div class="mt-4 sm:mt-0 flex flex-col items-end space-y-1">
+    <time class="text-xs text-gray-400">
+      {{ action.createdAt ? action.createdAt|date('d/m/Y') : 'Date inconnue' }}
+    </time>
+    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-pink-200 text-pink-700">
+      {{ action.type.value|default('Statut inconnu')|capitalize }}
+    </span>
+  </div>
+</div>

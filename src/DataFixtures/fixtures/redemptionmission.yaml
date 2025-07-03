@@ -2,17 +2,17 @@ App\Entity\RedemptionMission:
   redemption_mission_1:
     title: "Opération Contrôle des Émotions"
     description: "Après avoir insulté plusieurs utilisateurs sur Twitter, cette mission invite l'utilisateur à méditer chaque jour pendant une semaine et à rédiger un thread sur la gestion de la colère numérique."
-    severity_min: 2
+    severity_min: 1
     Offenses: ['@offense_1', '@offense_2', '@offense_3']
 
   redemption_mission_2:
     title: "Excuse-toi publiquement"
     description: "En réparation de propos particulièrement humiliants, cette mission consiste à écrire un message d'excuse sincère en public et à mentionner les personnes visées. Une capture d’écran est exigée pour vérification."
-    severity_min: 3
+    severity_min: 2
     Offenses: ['@offense_4', '@offense_5']
 
   redemption_mission_3:
     title: "Challenge Empathie Numérique"
     description: "L’utilisateur doit commenter positivement 5 publications de parfaits inconnus, en exprimant un compliment réel et argumenté. Chaque commentaire sera analysé par l’IA pour détecter l’ironie passive-agressive."
-    severity_min: 2
+    severity_min: 3
     Offenses: ['@offense_6', '@offense_7', '@offense_8', '@offense_9']

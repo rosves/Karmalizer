@@ -1,0 +1,17 @@
+<li>
+	<a href="{{ path('app_offense_detail', {id: Offense.id}) }}" class="block bg-white rounded-xl shadow p-4 hover:shadow-lg transition-shadow text-gray-700" role="button" tabindex="0">
+
+		<div class="flex justify-between items-start mb-2">
+			<time class="text-xs text-gray-400">
+				{{ Offense.dateoffense ? Offense.dateoffense|date('d/m/Y') : 'Date inconnue' }}
+			</time>
+		</div>
+
+		<p class="text-sm line-clamp-3 mb-2">{{ Offense.content }}</p>
+
+		<div class="text-xs text-gray-500 italic text-right">
+			Plateforme :
+			{{ Offense.platform.value }}
+		</div>
+	</a>
+</li>
