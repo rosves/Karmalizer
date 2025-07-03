@@ -1,5 +1,5 @@
 <?php
-namespace App\DataFixtures\providers;
+namespace App\DataFixtures\fixtures\providers;
 
 use App\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;

@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin Dashboard — Karmalizer{% endblock %}
+
+{% block javascripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById("sidebar-toggle");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebar-overlay");
+    const closeBtn = document.getElementById("sidebar-close");
+
+    function openSidebar() {
+        sidebar.classList.remove("hidden");
+        sidebar.classList.add("fixed", "top-0", "left-0", "w-64", "h-full", "bg-white", "z-50", "shadow-lg");
+        overlay.classList.remove("hidden");
+    }
+
+    function closeSidebar() {
+        sidebar.classList.add("hidden");
+        sidebar.classList.remove("fixed", "top-0", "left-0", "w-64", "h-full", "bg-white", "z-50", "shadow-lg");
+        overlay.classList.add("hidden");
+    }
+
+    toggleBtn?.addEventListener("click", openSidebar);
+    closeBtn?.addEventListener("click", closeSidebar);
+    overlay?.addEventListener("click", closeSidebar);
+});
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="min-h-screen flex flex-col lg:flex-row bg-gray-50">
+
+    {# Sidebar - hidden on mobile, toggled with button #}
+    <aside id="sidebar" class="hidden lg:block lg:w-64 bg-white border-r border-gray-200">
+        <div class="p-4 font-bold text-xl text-pink-600 border-b border-gray-200">Karmalizer Admin</div>
+        <nav class="mt-4">
+            <a href="{{ path('admin') }}" class="block px-4 py-2 hover:bg-pink-100 text-pink-700 font-semibold">Dashboard</a>
+            <a href="{{ path('admin_redemption_mission_index') }}" class="block px-4 py-2 hover:bg-pink-100">Missions</a>
+            <a href="{{ path('admin_reward_index') }}" class="block px-4 py-2 hover:bg-pink-100">Récompenses</a>
+            <a href="{{ path('admin_user_index') }}" class="block px-4 py-2 hover:bg-pink-100">Utilisateurs & Rôles</a>
+        </nav>
+    </aside>
+
+    {# Overlay for mobile sidebar #}
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-25 z-40 hidden lg:hidden"></div>
+
+    {# Mobile header with toggle #}
+    <header class="bg-white p-4 border-b border-gray-200 flex items-center justify-between lg:hidden">
+        <button id="sidebar-toggle" aria-label="Toggle sidebar" class="text-pink-600 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor"
+                 viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
+        <div class="font-bold text-xl text-pink-600">Karmalizer Admin</div>
+    </header>
+
+    {# Close button inside sidebar for mobile #}
+    <button id="sidebar-close" class="absolute top-4 right-4 text-pink-600 lg:hidden focus:outline-none hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor"
+             viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+    </button>
+
+    {# Main content area #}
+    <main class="flex-1 p-6 overflow-auto">
+        <h1 class="text-3xl font-bold text-pink-600 mb-8 text-center">Tableau de bord Admin</h1>
+
+        {# Exemple de section à personnaliser selon CRUD #}
+        {# <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Gestion des Missions karmiques</h2>
+        
+            {{ block('missions_crud') }}
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Gestion des Récompenses</h2>
+            {{ block('rewards_crud') }}
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Gestion des Utilisateurs & Rôles</h2>
+            {{ block('users_crud') }}
+        </section> #}
+
+        {# <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Actions Utilisateurs en cours</h2>
+            {{ block('actions_crud') }}
+        </section> #}
+    </main>
+</div>
+{% endblock %}

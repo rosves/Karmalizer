@@ -7,9 +7,7 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
+
 final class Version20250702084519 extends AbstractMigration
 {
     public function getDescription(): string
@@ -19,7 +17,7 @@ final class Version20250702084519 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
+        
         $this->addSql('CREATE TABLE apology (id INT NOT NULL, message VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE creative_redemption (id INT NOT NULL, content VARCHAR(255) NOT NULL, media_url VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE donation (id INT NOT NULL, amount INT NOT NULL, donation_target VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
@@ -86,7 +84,7 @@ final class Version20250702084519 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
+       
         $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE apology DROP CONSTRAINT FK_91F3852CBF396750');
         $this->addSql('ALTER TABLE creative_redemption DROP CONSTRAINT FK_EEEA8FF5BF396750');
