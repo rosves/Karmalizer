@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
 use App\Entity\Offense;
 use App\Form\AnalyseForm;
+use App\Form\SubmitKarmaActionForm;
 use App\Service\SeverityAnalyzer;
 use App\Repository\OffenseRepository;
 use App\Repository\KarmaActionRepository;
@@ -111,10 +112,14 @@ final class UserController extends AbstractController
     }
 
     #[Route('/user/KarmaActions/{id}', name: 'app_karmaAction_detail')]
-    public function KarmaActionDetail($id): Response {
+    public function KarmaActionDetail($id, Request $request): Response {
+
+        $form = $this->createForm(SubmitKarmaActionForm::class);
+        $form->handleRequest($request);
 
       return $this->render('pages/mission_detail.html.twig', [
             'KarmaAction' => $id,
+            'form' => $form,
         ]);
     }
 

@@ -50,6 +50,8 @@ class KarmaAction
     public function __construct()
     {
         $this->redemptionVotes = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->Type = StatusType::Pending;
     }
 
     public function getId(): ?int
