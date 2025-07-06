@@ -38,7 +38,7 @@ class RedemptionMissionCrudController extends AbstractCrudController
             ->setRequired(true)
             ->setHelp('Décrire la mission karmique en détail.');
 
-        yield AssociationField::new('offenses', 'Posts problématiques liés')
+        yield AssociationField::new('Offenses', 'Posts problématiques liés')
             ->setFormTypeOptions(['by_reference' => false])
             ->setHelp('Sélectionner les offenses associées à cette mission.');
 

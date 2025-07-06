@@ -2,6 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use App\Enum\RewardType;
+
 use App\Entity\Reward;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\{IdField, TextField, TextareaField, DateTimeField, ChoiceField, AssociationField};
@@ -31,15 +33,13 @@ class RewardCrudController extends AbstractCrudController
 
         yield ChoiceField::new('type', 'Type de récompense')
             ->setChoices([
-                'badge' => 'badge',
-                'trophy' => 'trophy',
-                'coupon' => 'coupon',
-            ]);
+                'badge' => RewardType::badge,
+                'coupon' => RewardType::coupon,
+                'trophy' => RewardType::trophy,
+            ])
+             -> renderExpanded(false);
 
-        // Permettre d'associer les missions de rédemption liées à cette récompense
         yield AssociationField::new('RedemptionMission_id', 'Missions liées')->autocomplete();
-
-        // Si tu veux aussi gérer l'association avec les utilisateurs (souvent pas dans le CRUD admin Rewards)
-        // yield AssociationField::new('User_id', 'Utilisateurs')->autocomplete();
+        yield AssociationField::new('User_id', 'Utilisateurs')->autocomplete();
     }
 }

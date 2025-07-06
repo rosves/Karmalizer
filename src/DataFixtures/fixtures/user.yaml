@@ -13,7 +13,70 @@ App\Entity\User:
     roles: ['ROLE_MODERATOR']
     KarmaBalance: <numberBetween(50, 200)>
 
-  user_{1..10}:
+  user_1:
+    username: <userName()>
+    email: <email()>
+    password: <encodePassword('password')>
+    roles: ['ROLE_USER']
+    KarmaBalance: <numberBetween(0, 100)>
+
+  user_2:
+    username: <userName()>
+    email: <email()>
+    password: <encodePassword('password')>
+    roles: ['ROLE_USER']
+    KarmaBalance: <numberBetween(0, 100)>
+
+  user_3:
+    username: <userName()>
+    email: <email()>
+    password: <encodePassword('password')>
+    roles: ['ROLE_USER']
+    KarmaBalance: <numberBetween(0, 100)>
+
+  user_4:
+    username: <userName()>
+    email: <email()>
+    password: <encodePassword('password')>
+    roles: ['ROLE_USER']
+    KarmaBalance: <numberBetween(0, 100)>
+
+  user_5:
+    username: <userName()>
+    email: <email()>
+    password: <encodePassword('password')>
+    roles: ['ROLE_USER']
+    KarmaBalance: <numberBetween(0, 100)>
+
+  user_6:
+    username: <userName()>
+    email: <email()>
+    password: <encodePassword('password')>
+    roles: ['ROLE_USER']
+    KarmaBalance: <numberBetween(0, 100)>
+
+  user_7:
+    username: <userName()>
+    email: <email()>
+    password: <encodePassword('password')>
+    roles: ['ROLE_USER']
+    KarmaBalance: <numberBetween(0, 100)>
+
+  user_8:
+    username: <userName()>
+    email: <email()>
+    password: <encodePassword('password')>
+    roles: ['ROLE_USER']
+    KarmaBalance: <numberBetween(0, 100)>
+
+  user_9:
+    username: <userName()>
+    email: <email()>
+    password: <encodePassword('password')>
+    roles: ['ROLE_USER']
+    KarmaBalance: <numberBetween(0, 100)>
+
+  user_10:
     username: <userName()>
     email: <email()>
     password: <encodePassword('password')>

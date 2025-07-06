@@ -1,5 +1,5 @@
 <?php
-namespace App\DataFixtures\fixtures\providers;
+namespace App\DataFixtures\Providers;
 
 use App\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -15,6 +15,7 @@ class EncodePasswordProvider
 
     public function encodePassword(string $plainPassword): string
     {
-        return $this->passwordHasher->hashPassword(new User(), $plainPassword);
+        $user = new User(); 
+        return $this->passwordHasher->hashPassword($user, $plainPassword);
     }
 }

@@ -146,4 +146,9 @@ class Reward
 
         return $this;
     }
+
+    public function __toString(): string
+{
+    return $this->name ?? 'Récompense sans nom';
+}
 }
