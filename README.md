@@ -18,7 +18,7 @@ Assure-toi d'avoir installé sur ta machine :
 1. Clone le projet :
 
 ```bash
-git clone https://github.com/ton-utilisateur/ton-projet.git
+git clone https://github.com/ton-utilisateur/ton-projet.git](https://github.com/rosves/Karmalizer.git
 cd ton-projet
 ```
 
