@@ -42,39 +42,6 @@ npm run build     # ou `npm run dev` ou `npm run watch`
 
 ---
 
-## 🐳 Lancer la base de données avec Docker
-
-1. Démarre un conteneur PostgreSQL (ou MySQL selon ta config) :
-
-**Exemple pour PostgreSQL :**
-
-Crée un fichier `docker-compose.yml` à la racine (si absent) :
-
-```yaml
-version: '3.8'
-
-services:
-  database:
-    image: postgres:15
-    environment:
-      POSTGRES_DB: karmalizer
-      POSTGRES_USER: symfony
-      POSTGRES_PASSWORD: symfony
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-volumes:
-  postgres_data:
-```
-
-Puis exécute :
-
-```bash
-docker-compose up -d
-```
-
 ---
 
 ## ⚙️ Configuration de l'environnement
@@ -90,10 +57,17 @@ cp .env .env.local
 Dans `.env.local` :
 
 ```dotenv
-DATABASE_URL="postgresql://symfony:symfony@localhost:5432/karmalizer?serverVersion=15&charset=utf8"
+DATABASE_URL="postgresql://symfony:symfony@localhost:5432/karmalizer?serverVersion=16&charset=utf8"
 ```
 
+## 🐳 Lancer la base de données avec Docker
+
 ---
+
+
+```bash
+docker-compose up -d
+```
 
 ## 🛠️ Création de la base de données
 
