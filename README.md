@@ -106,7 +106,7 @@ php bin/console doctrine:database:create
 2. Génère le schéma :
 
 ```bash
-php bin/console doctrine:migrations:migrate
+php bin/console doctrine:schema:update --force
 ```
 
 ---
@@ -117,23 +117,11 @@ php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
 ```
 
-👉 Tape `y` quand Symfony demande confirmation.
-
----
-
 ## 🔥 Lancer le serveur Symfony
 
 ```bash
 symfony server:start
 ```
-
-Ou si tu n’as pas la CLI Symfony :
-
-```bash
-php -S localhost:8000 -t public
-```
-
----
 
 ## 🧪 Vérifier que tout fonctionne
 
@@ -141,34 +129,7 @@ Accède à [http://localhost:8000](http://localhost:8000)
 
 ---
 
-## ✨ Bonus : recompilation automatique des assets
 
-```bash
-npm run watch
-```
 
----
 
-## 📂 Structure principale
 
-```
-├── assets/                # Fichiers JS/CSS/Tailwind
-├── config/                # Config Symfony
-├── docker-compose.yml     # Conteneur BDD
-├── migrations/            # Fichiers de migration Doctrine
-├── src/                   # Code PHP (Controllers, Entities, etc.)
-├── templates/             # Vues Twig
-└── ...
-```
-
----
-
-## 🤝 Contribuer
-
-Les PR sont les bienvenues. Merci de suivre les conventions de code Symfony et d’écrire des messages de commit clairs.
-
----
-
-## 📄 Licence
-
-Ce projet est sous licence MIT.
